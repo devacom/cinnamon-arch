@@ -1,9 +1,10 @@
-# Maintainer: Eli Schwartz <eschwartz@archlinux.org>
+# Maintainer: devacom <devacom@protonmail.co>
 # Contributor: Alexandre Filgueira <alexfilgueira@cinnarch.com>
+# Contributor: Eli Schwartz <eschwartz@archlinux.org
 # Contributor: M0Rf30
 # Contributor: unifiedlinux
 # Contributor: CReimer
-# Contributor: devacom
+
 
 pkgname=cinnamon-git
 pkgver=5.2.7.r1.g6028cbbf1
@@ -67,13 +68,12 @@ prepare() {
     sed -i 's|/usr/share/cinnamon-background-properties|/usr/share/gnome-background-properties|' \
         files/usr/share/cinnamon/cinnamon-settings/modules/cs_backgrounds.py
 
-    #meson build/
 }
 
 build() {
     cd "${srcdir}"/${pkgname%-git}
 
-    meson configure build/ -Dprefix=/usr \
+    meson configure src/cinnamon build/ -Dprefix=/usr \
                 -Dsysconfdir=/etc \
                 -Dlibexecdir=/usr/lib/cinnamon \
                 -Dlocalstatedir=/var \
