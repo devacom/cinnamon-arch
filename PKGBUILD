@@ -71,18 +71,19 @@ prepare() {
 }
 
 build() {
-    cd "${srcdir}"/${pkgname%-git}
-
-    meson configure build/ -Dprefix=/usr \
-                -Dsysconfdir=/etc \
-                -Dlibexecdir=/usr/lib/cinnamon \
-                -Dlocalstatedir=/var \
+    #cd "${srcdir}"/${pkgname%-git}
+    wdir=${srcdir}/${pkgname%-git}
+    meson setup ${wdir} "${wdir}"/build --prefix=/usr \
+                --sysconfdir=/etc \
+                --libexecdir=/usr/lib/cinnamon \
+                --localstatedir=/var \
+    
 
     # https://bugzilla.gnome.org/show_bug.cgi?id=656231
     #sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 
     #make
-    ninja -C build/
+    ninja -C "${wdir}"/build/
 }
 
 package() {
