@@ -73,7 +73,7 @@ prepare() {
 build() {
     cd "${srcdir}"/${pkgname%-git}
 
-    meson configure src/cinnamon build/ -Dprefix=/usr \
+    meson configure build/ -Dprefix=/usr \
                 -Dsysconfdir=/etc \
                 -Dlibexecdir=/usr/lib/cinnamon \
                 -Dlocalstatedir=/var \
