@@ -6,12 +6,12 @@
 # Contributor: CReimer
 
 
-pkgname=cinnamon-git
+pkgname=cinnamon-arch
 pkgver=5.2.7.r1.g6028cbbf1
 pkgrel=1
 pkgdesc="Linux desktop which provides advanced innovative features and a traditional user experience"
 arch=('x86_64')
-url="https://github.com/linuxmint/${pkgname%-git}"
+url="https://github.com/linuxmint/${pkgname%-arch}"
 license=('GPL2')
 depends=('accountsservice' 'caribou' 'cinnamon-control-center' 'cinnamon-menus' 'cinnamon-screensaver'
          'cinnamon-session' 'cinnamon-settings-daemon' 'cjs' 'gnome-backgrounds'
@@ -24,8 +24,8 @@ optdepends=('blueberry: Bluetooth support'
             'gnome-panel: fallback mode'
             'metacity: fallback mode'
             'system-config-printer: printer settings')
-provides=("${pkgname%-git}=${pkgver}")
-conflicts=("${pkgname%-git}")
+provides=("${pkgname%-arch}=${pkgver}")
+conflicts=("${pkgname%-arch}")
 makedepends=('git' 'intltool' 'gtk-doc' 'gobject-introspection')
 options=('!emptydirs')
 source=("git+${url}.git"
@@ -38,13 +38,13 @@ sha256sums=('SKIP'
             'SKIP')
 
 pkgver() {
-    cd "${srcdir}"/${pkgname%-git}
+    cd "${srcdir}"/${pkgname%-arch}
 
     git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
-    cd "${srcdir}"/${pkgname%-git}
+    cd "${srcdir}"/${pkgname%-arch}
 
     # Check for the cc-panel module path, not for the irrelevant binary
     # https://github.com/linuxmint/Cinnamon/pull/7382
@@ -71,8 +71,8 @@ prepare() {
 }
 
 build() {
-    #cd "${srcdir}"/${pkgname%-git}
-    wdir=${srcdir}/${pkgname%-git}
+    #cd "${srcdir}"/${pkgname%-arch}
+    wdir=${srcdir}/${pkgname%-arch}
     meson setup ${wdir} "${wdir}"/build --prefix=/usr \
                 --sysconfdir=/etc \
                 --libexecdir=/usr/lib/cinnamon \
@@ -87,7 +87,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}"/${pkgname%-git}
+    cd "${srcdir}"/${pkgname%-arch}
 
     ninja -C build/ install
 }
